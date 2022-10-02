@@ -25,6 +25,32 @@ state("vexspeed")
 	int reset : 0x007E8A60, 0x57C, 0x2c, 0x24, 0xE54, 0xF8;
 }
 
+state("vexspeeddebug")//uses different pointer path
+{
+	//This variable is a magic number. It should be 0x13371337.
+	//It's a variable of the main script. 
+	int magicNumber : 0x00804070, 0x8, 0x34, 0x148, 0x8C, 0x9C, 0xA8, 0x57C, 0x2c, 0x24, 0xE54, 0xE8;
+	
+	//This variable is incremented whenever the player presses the start button.
+	//It's a variable of the main script. 
+	int start : 0x00804070, 0x8, 0x34, 0x148, 0x8C, 0x9C, 0xA8, 0x57C, 0x2c, 0x24, 0xE54, 0xEC;
+	
+	//This variable is incremented whenever you beat a level.
+	//It's a variable of the main script. 
+	int split : 0x00804070, 0x8, 0x34, 0x148, 0x8C, 0x9C, 0xA8, 0x57C, 0x2c, 0x24, 0xE54, 0xF0;
+	
+	//This variable counts frames, starting when start is inc'd. 
+	//Stops when the last portal is reached.
+	//the program is started. 
+	//It's a variable of the main script. 
+	int time : 0x00804070, 0x8, 0x34, 0x148, 0x8C, 0x9C, 0xA8, 0x57C, 0x2c, 0x24, 0xE54, 0xF4;
+	
+	//This variable is incremented whenever you reset the data.
+	//It's a variable of the main script. 
+	int reset : 0x00804070, 0x8, 0x34, 0x148, 0x8C, 0x9C, 0xA8, 0x57C, 0x2c, 0x24, 0xE54, 0xF8;
+}
+
+
 
 
 startup
@@ -41,6 +67,7 @@ init{if(settings["debug"]){vars.TimerModel.Start();}}
 
 update
 {
+	//if(settings["debug"]){return true;}
 	int magicNumber = 0x13371337;
 	return magicNumber == current.magicNumber;
 }
@@ -53,7 +80,6 @@ start
 
 split
 {
-	if(settings["debug"]){vars.TimerModel.Split();}
 	return current.split > old.split;
 }
 
