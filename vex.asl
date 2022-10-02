@@ -32,8 +32,11 @@ startup
 	//This seems to allow us to play around with the timer functions,
 	//we need this to reset when you exit the game.
 	vars.TimerModel = new TimerModel { CurrentState = timer };
+	
+	settings.Add("debug", false, "debug do not enable");
 }
 
+init{if(settings["debug"]){vars.TimerModel.Start();}}
 
 
 update
