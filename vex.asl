@@ -53,6 +53,7 @@ start
 
 split
 {
+	if(settings["debug"]){vars.TimerModel.Split();}
 	return current.split > old.split;
 }
 
