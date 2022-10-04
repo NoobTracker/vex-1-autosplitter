@@ -4,30 +4,6 @@ state("vexspeed")
 {
 	//This variable is a magic number. It should be 0x13371337.
 	//It's a variable of the main script. 
-	int magicNumber : 0x007E8A60, 0x57C, 0x2c, 0x24, 0xE54, 0xE8;
-	
-	//This variable is incremented whenever the player presses the start button.
-	//It's a variable of the main script. 
-	int start : 0x007E8A60, 0x57C, 0x2c, 0x24, 0xE54, 0xEC;
-	
-	//This variable is incremented whenever you beat a level.
-	//It's a variable of the main script. 
-	int split : 0x007E8A60, 0x57C, 0x2c, 0x24, 0xE54, 0xF0;
-	
-	//This variable counts frames, starting when start is inc'd. 
-	//Stops when the last portal is reached.
-	//It's a variable of the main script. 
-	int time : 0x007E8A60, 0x57C, 0x2c, 0x24, 0xE54, 0xF4;
-	
-	//This variable is incremented whenever you reset the data.
-	//It's a variable of the main script. 
-	int reset : 0x007E8A60, 0x57C, 0x2c, 0x24, 0xE54, 0xF8;
-}
-
-state("vexspeeddebug")//uses different pointer path
-{
-	//This variable is a magic number. It should be 0x13371337.
-	//It's a variable of the main script. 
 	int magicNumber : 0x007E8A60, 0x158, 0x94, 0x1C, 0x4F8, 0x240, 0x18, 0xEB4, 0xE8;
 	
 	//This variable is incremented whenever the player presses the start button.
@@ -55,16 +31,11 @@ startup
 	//This seems to allow us to play around with the timer functions,
 	//we need this to reset when you exit the game.
 	vars.TimerModel = new TimerModel { CurrentState = timer };
-	
-	settings.Add("debug", false, "debug do not enable");
 }
-
-init{if(settings["debug"]){vars.TimerModel.Start();}}
 
 
 update
 {
-	//if(settings["debug"]){return true;}
 	int magicNumber = 0x13371337;
 	return magicNumber == current.magicNumber;
 }
